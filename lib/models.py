@@ -25,7 +25,9 @@ class Restaurant(Base):
     @classmethod
     def fanciest(cls):
          return session.query(cls).order_by(cls.price.desc()).first()
-
+    
+    def all_reviews(self):
+        [review.full_review() for review in self.reviews]
 
 class Customer(Base):
     __tablename__ = 'customers'
