@@ -32,6 +32,9 @@ class Customer(Base):
     # Define a one-to-many relationship with review class
     reviews = relationship('Review', back_populates='customer')
 
+    # Define a many-to-many relationship with restaurant class through reviews table
+    restaurants = relationship('Restaurant', secondary='reviews', back_populates='customers')
+
 class Review(Base):
     __tablename__ ='reviews'
 
