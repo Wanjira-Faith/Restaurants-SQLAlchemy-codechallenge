@@ -22,6 +22,11 @@ class Restaurant(Base):
     # Define a many-to-many relationship with customer class through reviews table
     customers = relationship('Customer', secondary='reviews', back_populates='restaurants')
 
+    @classmethod
+    def fanciest(cls):
+         return session.query(cls).order_by(cls.price.desc()).first()
+
+
 class Customer(Base):
     __tablename__ = 'customers'
 
