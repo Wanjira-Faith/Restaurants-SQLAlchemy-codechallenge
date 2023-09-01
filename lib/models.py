@@ -28,7 +28,7 @@ class Restaurant(Base):
     
     def all_reviews(self):
         [review.full_review() for review in self.reviews]
-        
+
 
 class Customer(Base):
     __tablename__ = 'customers'
@@ -47,6 +47,12 @@ class Customer(Base):
     def add_review(self, restaurant, rating):
         new_review = Review(customer_id=self.id, restaurant_id=restaurant.id, star_rating=rating)
         session.add(new_review)
+        session.commit()
+
+    def delete_reviews(self, restaurant):
+        reviews_to_delete = session.query(Review).filter(Review.restaurant == restaurant, Review.customer == self).all()
+        for review in reviews_to_delete:
+            session.delete(review)
         session.commit()
 
 
