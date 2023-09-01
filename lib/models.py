@@ -37,6 +37,12 @@ class Customer(Base):
     first_name = Column(String)
     last_name = Column(String)
 
+    # Define a one-to-many relationship with review class
+    reviews = relationship('Review', back_populates='customer')
+
+    # Define a many-to-many relationship with restaurant class through reviews table
+    restaurants = relationship('Restaurant', secondary='reviews', back_populates='customers')
+
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
     
@@ -54,13 +60,6 @@ class Customer(Base):
         for review in reviews_to_delete:
             session.delete(review)
         session.commit()
-
-
-    # Define a one-to-many relationship with review class
-    reviews = relationship('Review', back_populates='customer')
-
-    # Define a many-to-many relationship with restaurant class through reviews table
-    restaurants = relationship('Restaurant', secondary='reviews', back_populates='customers')
 
 class Review(Base):
     __tablename__ ='reviews'
