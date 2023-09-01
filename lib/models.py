@@ -43,8 +43,10 @@ class Review(Base):
     customer_id = Column(Integer, ForeignKey('customers.id'))
     star_rating = Column(Integer)
 
-  
+    # Define relationships with restaurant and customer class
+    restaurant = relationship('Restaurant', back_populates='reviews')
 
+  
 # create all tables in the database
 Base.metadata.create_all(engine)
 
