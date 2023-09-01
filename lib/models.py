@@ -16,6 +16,9 @@ class Restaurant(Base):
     name = Column(String)  
     price = Column(Integer)  
 
+    # Define a one-to-many relationship with review class
+    reviews = relationship('Review', back_populates='restaurant')
+
 class Customer(Base):
     __tablename__ = 'customers'
 
@@ -30,6 +33,8 @@ class Review(Base):
     restaurant_id = Column(Integer, ForeignKey('restaurants.id'))
     customer_id = Column(Integer, ForeignKey('customers.id'))
     star_rating = Column(Integer)
+
+  
 
 # create all tables in the database
 Base.metadata.create_all(engine)
