@@ -30,3 +30,10 @@ class Review(Base):
     restaurant_id = Column(Integer, ForeignKey('restaurants.id'))
     customer_id = Column(Integer, ForeignKey('customers.id'))
     star_rating = Column(Integer)
+
+# create all tables in the database
+Base.metadata.create_all(engine)
+
+# create session
+Session = sessionmaker(bind=engine)
+session = Session()
