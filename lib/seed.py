@@ -25,4 +25,5 @@ review4 = Review(restaurant=restaurant3, customer=customer3, star_rating=8)
 session.add_all([restaurant1, restaurant2, restaurant3, customer1, customer2, customer3, review1, review2, review3, review4])
 session.commit()
 
+session.close()
 
