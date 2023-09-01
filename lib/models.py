@@ -29,6 +29,9 @@ class Customer(Base):
     first_name = Column(String)
     last_name = Column(String)
 
+    # Define a one-to-many relationship with review class
+    reviews = relationship('Review', back_populates='customer')
+
 class Review(Base):
     __tablename__ ='reviews'
 
