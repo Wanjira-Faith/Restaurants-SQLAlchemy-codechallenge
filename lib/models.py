@@ -3,7 +3,7 @@ from sqlalcemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker,relationship
 
 # Define database commnection
-engine = create_engine('sqlite///:restaurants.db', echo=True)
+engine = create_engine('sqlite///:restaurant.db', echo=True)
 
 #base class for all the classes
 Base = declarative_base()
