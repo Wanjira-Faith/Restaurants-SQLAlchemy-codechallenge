@@ -12,7 +12,7 @@ restaurant1 = Restaurant(name='Delicious Eatery', price=15000)
 restaurant2 = Restaurant(name='Dusit Princess', price=20000)
 restaurant3 = Restaurant(name='Cuban Code', price=17000)
 
-customer1 = Customer(firts_name='Linda', last_name='Wambui')
+customer1 = Customer(first_name='Linda', last_name='Wambui')
 customer2 = Customer(first_name='Abdi', last_name='Malik')
 customer3 = Customer(first_name='Viela', last_name='Clara')
 
