@@ -22,3 +22,11 @@ class Customer(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
+
+class Review(Base):
+    __tablename__ ='reviews'
+
+    id = Column(Integer, primary_key=True)
+    restaurant_id = Column(Integer, ForeignKey('restaurants.id'))
+    customer_id = Column(Integer, ForeignKey('customers.id'))
+    star_rating = Column(Integer)
