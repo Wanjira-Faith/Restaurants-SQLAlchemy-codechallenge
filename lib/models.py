@@ -28,6 +28,7 @@ class Restaurant(Base):
     
     def all_reviews(self):
         [review.full_review() for review in self.reviews]
+        
 
 class Customer(Base):
     __tablename__ = 'customers'
@@ -42,6 +43,11 @@ class Customer(Base):
     def favourite_restaurant(self):
         return session.query(Restaurant).join(Review).filter(Review.customer_id == self.id).\
             order_by(Review.star_rating.desc()).limit(1).first()
+    
+    def add_review(self, restaurant, rating):
+        new_review = Review(customer_id=self.id, restaurant_id=restaurant.id, star_rating=rating)
+        session.add(new_review)
+        session.commit()
 
 
     # Define a one-to-many relationship with review class
