@@ -38,6 +38,10 @@ class Customer(Base):
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
+    
+    def favourite_restaurant(self):
+        return session.query(Restaurant).join(Review).filter(Review.customer_id == self.id).\
+            order_by(Review.star_rating.desc()).limit(1).first()
 
 
     # Define a one-to-many relationship with review class
