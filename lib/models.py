@@ -36,6 +36,10 @@ class Customer(Base):
     first_name = Column(String)
     last_name = Column(String)
 
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+
     # Define a one-to-many relationship with review class
     reviews = relationship('Review', back_populates='customer')
 
