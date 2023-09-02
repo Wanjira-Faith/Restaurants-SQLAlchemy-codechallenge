@@ -31,7 +31,7 @@ customer = session.query(Customer).filter_by(first_name="Linda").first()
 print(f"Customer Full Name: {customer.full_name()}")
 print('-------------------------------')
 
-# Print the customer's favorite restaurant
+# Print the customer's favorite restaurant with the highest star rating
 favourite_restaurant = customer.favourite_restaurant()
 rating = session.query(func.max(Review.star_rating)).filter_by(restaurant=favourite_restaurant).scalar()
 
