@@ -27,7 +27,7 @@ class Restaurant(Base):
          return session.query(cls).order_by(cls.price.desc()).first()
     
     def all_reviews(self):
-        [review.full_review() for review in self.reviews]
+        return [review.full_review() for review in self.reviews]
 
 
 class Customer(Base):
@@ -60,7 +60,7 @@ class Customer(Base):
         for review in reviews_to_delete:
             session.delete(review)
         session.commit()
-        
+
 
 class Review(Base):
     __tablename__ ='reviews'
