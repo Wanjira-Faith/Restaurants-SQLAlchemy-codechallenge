@@ -40,7 +40,7 @@ print(f"Favourite Restaurant: {favourite_restaurant.name} (Rating: {rating})")
 print('--------------------------------')
 
 # Add a review for a restaurant by the customer
-new_rating = 4  # Change this to the desired rating
+new_rating = 4  
 customer.add_review(restaurant, new_rating)
 
 # Print all reviews left by the customer
