@@ -47,9 +47,15 @@ class Customer(Base):
         return f"{self.first_name} {self.last_name}"
     
     def favourite_restaurant(self):
-        return session.query(Restaurant).join(Review).filter(Review.customer_id == self.id).\
-            order_by(Review.star_rating.desc()).limit(1).first()
-    
+        return (
+            session.query(Restaurant)
+            .join(Review)
+            .filter(Review.customer_id == self.id)
+            .order_by(Review.star_rating.desc())
+            .limit(1)
+            .first()
+        )
+        
     def add_review(self, restaurant, rating):
         new_review = Review(customer_id=self.id, restaurant_id=restaurant.id, star_rating=rating)
         session.add(new_review)
