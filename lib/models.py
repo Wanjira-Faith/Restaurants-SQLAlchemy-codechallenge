@@ -22,10 +22,12 @@ class Restaurant(Base):
     # Define a many-to-many relationship with customer class through reviews table
     customers = relationship('Customer', secondary='reviews', back_populates='restaurants')
 
+     # Retrieve the restaurant with the highest price rating
     @classmethod
     def fanciest(cls):
          return session.query(cls).order_by(cls.price.desc()).first()
     
+     # Retrieve all reviews for this restaurant and format them as strings
     def all_reviews(self):
         return [review.full_review() for review in self.reviews]
 
@@ -43,9 +45,11 @@ class Customer(Base):
     # Define a many-to-many relationship with restaurant class through reviews table
     restaurants = relationship('Restaurant', secondary='reviews', back_populates='customers')
 
+    # Concatenate first name and last name to get the full name of the customer
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
     
+    # Retrieve the customer's favorite restaurant based on the highest review rating
     def favourite_restaurant(self):
         return (
             session.query(Restaurant)
@@ -55,12 +59,14 @@ class Customer(Base):
             .limit(1)
             .first()
         )
-        
+
+    # Add a new review for the customer 
     def add_review(self, restaurant, rating):
         new_review = Review(customer_id=self.id, restaurant_id=restaurant.id, star_rating=rating)
         session.add(new_review)
         session.commit()
 
+    # Delete all reviews by the customer for a specific restaurant
     def delete_reviews(self, restaurant):
         reviews_to_delete = session.query(Review).filter(Review.restaurant == restaurant, Review.customer == self).all()
         for review in reviews_to_delete:
@@ -80,6 +86,7 @@ class Review(Base):
     restaurant = relationship('Restaurant', back_populates='reviews')
     customer = relationship('Customer', back_populates='reviews')
 
+    # Format the review as a string
     def full_review(self):
         return f"Review for {self.restaurant.name} by {self.customer.full_name()}: {self.star_rating} stars."
 
